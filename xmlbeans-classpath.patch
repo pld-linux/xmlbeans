@@ -1,0 +1,212 @@
+diff -Naur xmlbeans-2.4.0.orig/bin/dumpxsb xmlbeans-2.4.0/bin/dumpxsb
+--- xmlbeans-2.4.0.orig/bin/dumpxsb	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/dumpxsb	2009-01-01 20:18:02.000000000 +0100
+@@ -18,16 +18,6 @@
+ #XSB file dumper
+ #Prints the contents of an xsb file in human-readmble form
+ 
+-echo `dirname $0`
+-
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.tool.XsbDumper "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/inst2xsd xmlbeans-2.4.0/bin/inst2xsd
+--- xmlbeans-2.4.0.orig/bin/inst2xsd	2008-06-20 18:31:10.000000000 +0200
++++ xmlbeans-2.4.0/bin/inst2xsd	2009-01-01 20:18:12.000000000 +0100
+@@ -18,14 +18,6 @@
+ #Instance to Schema tool
+ #Builds xsd files from xml instance files.
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.inst2xsd.Inst2Xsd "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/scomp xmlbeans-2.4.0/bin/scomp
+--- xmlbeans-2.4.0.orig/bin/scomp	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/scomp	2009-01-01 20:18:22.000000000 +0100
+@@ -18,14 +18,6 @@
+ #Schema compiler
+ #Builds XBean types from xsd files.
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar:$JAVA_HOME/lib/tools.jar:$XMLBEANS_LIB/resolver.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -Xmx256m -classpath "$cp" org.apache.xmlbeans.impl.tool.SchemaCompiler "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/sdownload xmlbeans-2.4.0/bin/sdownload
+--- xmlbeans-2.4.0.orig/bin/sdownload	2008-06-20 18:31:10.000000000 +0200
++++ xmlbeans-2.4.0/bin/sdownload	2009-01-01 20:18:30.000000000 +0100
+@@ -18,14 +18,6 @@
+ #Schema downloader
+ #Tool to download Schema files
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.tool.SchemaResourceManager "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/sfactor xmlbeans-2.4.0/bin/sfactor
+--- xmlbeans-2.4.0.orig/bin/sfactor	2008-06-20 18:31:10.000000000 +0200
++++ xmlbeans-2.4.0/bin/sfactor	2009-01-01 20:18:40.000000000 +0100
+@@ -20,15 +20,7 @@
+ ## Factors redundant definitions out of a set of schemas and 
+ ## uses imports instead.
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar:$XMLBEANS_LIB/resolver.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -Xmx256m -classpath "$cp" org.apache.xmlbeans.impl.tool.FactorImports "$@"
+ 
+diff -Naur xmlbeans-2.4.0.orig/bin/svalidate xmlbeans-2.4.0/bin/svalidate
+--- xmlbeans-2.4.0.orig/bin/svalidate	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/svalidate	2009-01-01 20:22:31.000000000 +0100
+@@ -19,14 +19,6 @@
+ #
+ # Validates an instance against a schema.
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar:$XMLBEANS_LIB/jsr173_1.0_ri.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.tool.StreamInstanceValidator "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/validate xmlbeans-2.4.0/bin/validate
+--- xmlbeans-2.4.0.orig/bin/validate	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/validate	2009-01-01 20:22:46.000000000 +0100
+@@ -19,14 +19,6 @@
+ #
+ # Validates an instance against a schema.
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ exec java -classpath "$cp" org.apache.xmlbeans.impl.tool.InstanceValidator "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/xpretty xmlbeans-2.4.0/bin/xpretty
+--- xmlbeans-2.4.0.orig/bin/xpretty	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/xpretty	2009-01-01 20:22:59.000000000 +0100
+@@ -17,14 +17,6 @@
+ 
+ #Invokes pretty printer
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.tool.PrettyPrinter "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/xsd2inst xmlbeans-2.4.0/bin/xsd2inst
+--- xmlbeans-2.4.0.orig/bin/xsd2inst	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/xsd2inst	2009-01-01 20:23:12.000000000 +0100
+@@ -17,14 +17,6 @@
+ 
+ #Schema to instance tool
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.xsd2inst.SchemaInstanceGenerator "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/xsdtree xmlbeans-2.4.0/bin/xsdtree
+--- xmlbeans-2.4.0.orig/bin/xsdtree	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/xsdtree	2009-01-01 20:23:20.000000000 +0100
+@@ -17,14 +17,6 @@
+ 
+ # Invokes type hierarchy printer
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -Xmx256m -classpath "$cp" org.apache.xmlbeans.impl.tool.TypeHierarchyPrinter "$@"
+diff -Naur xmlbeans-2.4.0.orig/bin/xstc xmlbeans-2.4.0/bin/xstc
+--- xmlbeans-2.4.0.orig/bin/xstc	2008-06-20 18:31:12.000000000 +0200
++++ xmlbeans-2.4.0/bin/xstc	2009-01-01 20:23:28.000000000 +0100
+@@ -17,14 +17,6 @@
+ 
+ # Invokes XSTC
+ 
+-if [ -z "$XMLBEANS_LIB" ]; then . `dirname $0`/_setlib; fi
+-
+-cp=$XMLBEANS_LIB/xbean.jar:$XMLBEANS_LIB/xmlbeans-qname.jar:$XMLBEANS_LIB/jsr173_1.0_api.jar:$XMLBEANS_LIB/resolver.jar
+-
+-case "`uname`" in
+-    CYGWIN*)
+-        cp=`cygpath -w -p $cp`
+-        ;;
+-esac
++cp=$(build-classpath-directory /usr/share/java/xmlbeans)
+ 
+ java -classpath "$cp" org.apache.xmlbeans.impl.tool.XSTCTester "$@"
